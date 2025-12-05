@@ -12,9 +12,9 @@ const grilleDeDepart = [
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ];
-// script.js (suite)
+//
 
-// Référence au conteneur de la grille dans le DOM
+//
 const conteneurGrille = document.getElementById('sudoku-grid');
 
 /**
@@ -47,3 +47,4 @@ function afficherGrille() {
     }
 }
 afficherGrille();
+
