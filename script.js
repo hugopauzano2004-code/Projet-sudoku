@@ -12,3 +12,38 @@ const grilleDeDepart = [
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ];
+// script.js (suite)
+
+// Référence au conteneur de la grille dans le DOM
+const conteneurGrille = document.getElementById('sudoku-grid');
+
+/**
+ * Fonction pour parcourir le tableau 2D et créer les éléments <input> dans le DOM.
+ */
+function afficherGrille() {
+    
+    conteneurGrille.innerHTML = ''; 
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            
+
+            const caseInput = document.createElement('input');
+            caseInput.type = 'text';
+            caseInput.maxLength = 1;
+            caseInput.classList.add('sudoku-cell');
+
+            const valeur = grilleDeDepart[r][c];
+            if (valeur !== 0) {
+                caseInput.value = valeur;
+                caseInput.readOnly = true; 
+                caseInput.classList.add('pre-rempli'); 
+            }
+            else {
+                caseInput.value = ''; 
+                caseInput.classList.add('vide');
+            }
+            conteneurGrille.appendChild(caseInput);
+        }
+    }
+}
+afficherGrille();
