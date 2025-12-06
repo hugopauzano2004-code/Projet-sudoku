@@ -1,24 +1,19 @@
 #sudoku-grid {
     display: grid;
-    /* Créer 9 colonnes de même largeur */
     grid-template-columns: repeat(9, 1fr);
-    /* Définir la taille globale du jeu */
     width: 450px; 
     height: 450px;
-    margin: 20px auto; /* Centrer la grille */
+    margin: 20px auto;
     border: 3px solid black;
 }
 
 .sudoku-cell {
-    /* Style de base pour chaque case */
     border: 1px solid #aaa;
     text-align: center;
     font-size: 20px;
-    /* S'assurer que les cases non modifiables se distinguent */
 }
 
 .pre-rempli {
-    /* Les cases initiales (non modifiables) */
     background-color: #eee;
     font-weight: bold;
     color: #333;
