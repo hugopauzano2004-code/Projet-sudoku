@@ -171,3 +171,79 @@ function verifierUnite(unite) {
     // Si nous avons parcouru toute l'unité sans trouver de doublons, elle est valide.
     return true;
 }
+/**
+ * Vérifie si la grille de Sudoku est entièrement valide (toutes les lignes,
+ * colonnes et régions 3x3 sont valides).
+ * @param {number[][]} grille - Le tableau 2D (9x9) de la grille de Sudoku.
+ * @returns {boolean} True si la grille est entièrement valide, False sinon.
+ */
+function verifierGrilleComplete(grille) {
+    // Le nombre d'unités à vérifier dans chaque dimension
+    const TAILLE = 9;
+
+    // 1. Vérifie les 9 lignes et les 9 colonnes
+    for (let i = 0; i < TAILLE; i++) {
+        // Si une ligne est invalide, on arrête et retourne False
+        if (!verifierLigne(grille, i)) {
+            console.log(`Erreur: Doublon trouvé dans la ligne ${i + 1}`);
+            return false;
+        }
+
+        // Si une colonne est invalide, on arrête et retourne False
+        if (!verifierColonne(grille, i)) {
+            console.log(`Erreur: Doublon trouvé dans la colonne ${i + 1}`);
+            return false;
+        }
+    }
+
+    // 2. Vérifie les 9 régions 3x3
+    // Les points de départ (startLigne et startColonne) sont 0, 3 et 6.
+    for (let i = 0; i < TAILLE; i += 3) {
+        for (let j = 0; j < TAILLE; j += 3) {
+            // Si une région est invalide, on arrête et retourne False
+            if (!verifierRegion(grille, i, j)) {
+                console.log(`Erreur: Doublon trouvé dans la région commençant à (${i}, ${j})`);
+                return false;
+            }
+        }
+    }
+
+    // 3. Si toutes les 27 vérifications sont passées, la grille est valide.
+    return true;
+}
+// Récupérer la fonction que vous avez créée dans la Mission 2.2
+// function recupererGrilleJoueur() { ... } 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const boutonVerification = document.getElementById('verifier-solution');
+    const messageFeedback = document.getElementById('message-feedback');
+
+    if (boutonVerification) {
+        boutonVerification.addEventListener('click', gererVerificationSudoku);
+    }
+
+    function gererVerificationSudoku() {
+        // A. Récupérer la grille joueur
+        const grilleJoueur = recupererGrilleJoueur(); 
+        
+        // B. Lancer la vérification complète
+        const estValide = verifierGrilleComplete(grilleJoueur);
+
+        // C. Afficher un message de victoire ou d'erreur
+        if (estValide) {
+            // Optionnel : Vérifier si la grille est aussi complète (pas de 0) pour la victoire finale
+            const estComplete = grilleJoueur.flat().every(val => val !== 0);
+
+            if (estComplete) {
+                messageFeedback.textContent = "🥳 FÉLICITATIONS ! La grille est correcte et complète ! Vous avez gagné !";
+                messageFeedback.style.color = 'green';
+            } else {
+                messageFeedback.textContent = "✅ La grille est valide pour l'instant, mais il reste des cases à remplir.";
+                messageFeedback.style.color = 'blue';
+            }
+        } else {
+            messageFeedback.textContent = "❌ Erreur de Sudoku détectée ! Vérifiez vos doublons (ligne, colonne ou région).";
+            messageFeedback.style.color = 'red';
+        }
+    }
+});
