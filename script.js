@@ -94,3 +94,80 @@ function validerEntree(event) {
     // (Optionnel) Si l'entrée est valide, vous pouvez déclencher ici 
     // une vérification visuelle (ex: changer la couleur si la case est déjà correcte).
 }
+/**
+ * Vérifie qu'une ligne spécifique de la grille est valide.
+ * @param {number[][]} grille - Le tableau 2D (9x9) de la grille de Sudoku.
+ * @param {number} indexLigne - L'indice (de 0 à 8) de la ligne à vérifier.
+ * @returns {boolean} True si la ligne est valide (pas de doublon de 1-9), False sinon.
+ */
+function verifierLigne(grille, indexLigne) {
+    // 1. Extrait la ligne du tableau
+    const ligne = grille[indexLigne];
+
+    return verifierUnite(ligne);
+}
+/**
+ * Vérifie qu'une colonne spécifique de la grille est valide.
+ * @param {number[][]} grille - Le tableau 2D (9x9) de la grille de Sudoku.
+ * @param {number} indexColonne - L'indice (de 0 à 8) de la colonne à vérifier.
+ * @returns {boolean} True si la colonne est valide (pas de doublon de 1-9), False sinon.
+ */
+function verifierColonne(grille, indexColonne) {
+    // 1. Extrait la colonne (parcours vertical du tableau)
+    const colonne = [];
+    
+    // Parcourt les 9 lignes de la grille
+    for (let i = 0; i < 9; i++) {
+        colonne.push(grille[i][indexColonne]);
+    }
+
+    return verifierUnite(colonne);
+}
+/**
+ * Vérifie qu'une région 3x3 est valide.
+ * @param {number[][]} grille - Le tableau 2D (9x9) de la grille de Sudoku.
+ * @param {number} startLigne - L'indice de LIGNE (0, 3 ou 6) du coin supérieur gauche de la région.
+ * @param {number} startColonne - L'indice de COLONNE (0, 3 ou 6) du coin supérieur gauche de la région.
+ * @returns {boolean} True si la région est valide, False sinon.
+ */
+function verifierRegion(grille, startLigne, startColonne) {
+    // 1. Extrait les 9 cases de la région
+    const region = [];
+    
+    // Parcourt les 3 lignes de la région (startLigne à startLigne + 2)
+    for (let i = 0; i < 3; i++) {
+        // Parcourt les 3 colonnes de la région (startColonne à startColonne + 2)
+        for (let j = 0; j < 3; j++) {
+            const valeur = grille[startLigne + i][startColonne + j];
+            region.push(valeur);
+        }
+    }
+
+    return verifierUnite(region);
+}
+/**
+ * Vérifie si un tableau de 9 chiffres (unité) est valide.
+ * @param {number[]} unite - Un tableau de 9 nombres (ligne, colonne ou région).
+ * @returns {boolean} True si tous les chiffres non-zéro sont uniques, False sinon.
+ */
+function verifierUnite(unite) {
+    // Crée un Set pour stocker les chiffres rencontrés. Les Set n'acceptent pas les doublons.
+    const chiffresEnregistres = new Set(); 
+
+    for (let i = 0; i < unite.length; i++) {
+        const chiffre = unite[i];
+
+        // Ignorer les cases vides (représentées par 0)
+        if (chiffre !== 0) {
+            // Si le chiffre est déjà dans le Set, c'est un doublon. L'unité est invalide.
+            if (chiffresEnregistres.has(chiffre)) {
+                return false;
+            }
+            // Sinon, ajouter le chiffre au Set
+            chiffresEnregistres.add(chiffre);
+        }
+    }
+
+    // Si nous avons parcouru toute l'unité sans trouver de doublons, elle est valide.
+    return true;
+}
