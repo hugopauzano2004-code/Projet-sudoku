@@ -1,6 +1,3 @@
-/* style.css */
-
-/* Utiliser CSS Grid pour organiser les 81 cases */
 #sudoku-grid {
     display: grid;
     /* Créer 9 colonnes de même largeur */
