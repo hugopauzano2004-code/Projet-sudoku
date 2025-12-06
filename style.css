@@ -18,3 +18,46 @@
     font-weight: bold;
     color: #333;
 }
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* 9 colonnes de même largeur */
+    grid-template-rows: repeat(9, 1fr); /* 9 lignes de même hauteur */
+    width: 450px; /* Taille totale de la grille */
+    height: 450px;
+    border: 3px solid #333; /* Bordure extérieure */
+}
+
+.cell {
+    /* Styles de base pour chaque case */
+    border: 1px solid #aaa;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Bordures plus épaisses pour les blocs 3x3 */
+/* Bordures Droites: colonnes 3 et 6 */
+.cell:nth-child(9n+3),
+.cell:nth-child(9n+6) {
+    border-right-width: 3px;
+    border-right-color: #333;
+}
+
+/* Bordures Basses: lignes 3 et 6 */
+/* (Ceci cible les 9 cases de la 3ème et 6ème ligne) */
+
+    /* Applique la bordure basse épaisse aux 9 cases de la 3ème ligne */
+.cell:nth-child(9n + 27) {
+    border-bottom-width: 3px;
+    border-bottom-color: #333;
+}
+.cell.initial {
+    background-color: #eee; /* Fond gris clair */
+    font-weight: bold; /* Chiffres en gras */
+    color: #333; /* Couleur de texte sombre */
+    cursor: default; /* Curseur standard */
+}
+
+.cell:not(.initial) {
+    background-color: #fff; /* Fond blanc pour les cases jouables */
+    color: #00f; /* Par exemple, couleur bleue pour les entrées utilisateur */
+}
