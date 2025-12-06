@@ -11,9 +11,6 @@ const grilleDeDepart = [
 ];
 const conteneurGrille = document.getElementById('sudoku-grid');
 
-/**
- * Fonction pour parcourir le tableau 2D et créer les éléments <input> dans le DOM.
- */
 function afficherGrille() {
     
     conteneurGrille.innerHTML = ''; 
