@@ -8,9 +8,9 @@ Ce projet est un jeu de sudoku interactif avec la possiblilité de vérifier sa 
 
 ## Technologies utilisées
 
-HTML 
-CSS
-Javascript
+HTML, 
+CSS,
+Javascript et
 Google Gémini pour l'apprentisage
 
 ## Installation
