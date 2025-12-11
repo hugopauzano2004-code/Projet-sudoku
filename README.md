@@ -14,10 +14,10 @@ Javascript
 Google Gémini pour l'apprentisage
 
 ## Installation
-## Prérequis 
+### Prérequis 
 Git (Télécharger Git (https://git-scm.com/downloads))
 
-## Télécharger le projet
+### Télécharger le projet
 ```bash
 git clone https://github.com/hugopauzano2004-code/Projet-sudoku
 ```
