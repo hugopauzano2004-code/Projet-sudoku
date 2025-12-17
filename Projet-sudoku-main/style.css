@@ -1,0 +1,204 @@
+/* ===== Transition générale pour animation (GARDÉ) ===== */
+* {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* ================================================= */
+/* ============= MODE CLAIR : THÈME VACANCES 🏖️ ============= */
+/* ================================================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e0f7fa; 
+    color: #333333; 
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px; 
+    font-size: 2.5rem;
+}
+
+/* Grille - TAILLE CORRIGÉE */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 630px; /* AUGMENTÉ */
+    height: 630px; /* AUGMENTÉ */
+    border: 5px solid #ffcc80; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px; 
+    overflow: hidden; 
+    margin-bottom: 25px; /* ESPACEMENT CORRIGÉ */
+}
+
+.cell {
+    /* TAILLE DE CELLULE CORRIGÉE */
+    width: 70px; 
+    height: 70px;
+    border: 1px solid #b3e5fc; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px; /* POLICE AUGMENTÉE */
+    font-weight: bold;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+/* Effet "légère vague" au survol */
+.cell:hover {
+    background-color: #fff9c4; 
+}
+
+/* BORDURES 3X3 CORRIGÉES (MODE CLAIR) */
+
+/* Bordure droite des colonnes 3 et 6 */
+.cell:nth-child(3n) {
+    border-right: 3px solid #00acc1;
+}
+
+/* Bordure haute des lignes 1, 4 et 7 */
+.cell:nth-child(n):nth-child(-n + 9), /* Ligne 1 */
+.cell:nth-child(n + 19):nth-child(-n + 36), /* Ligne 4 (Cells 28-36) */
+.cell:nth-child(n + 46):nth-child(-n + 63) { /* Ligne 7 (Cells 55-63) */
+    border-top: 3px solid #00acc1;
+}
+
+/* Bordure basse des lignes 3 et 6 */
+.cell:nth-child(27n), .cell:nth-child(54n) {
+    border-bottom: 3px solid #00acc1;
+}
+
+/* On s'assure que la bordure du BAS de la ligne 9 n'est pas affectée (elle est gérée par la bordure du .grid-container) */
+
+
+.cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 2rem; 
+    font-weight: bold;
+    background-color: transparent;
+    color: #0d47a1;
+    outline: none;
+}
+
+/* Cellules initiales (fixes) */
+.fixed {
+    background-color: #fce4ec; 
+    font-weight: bold;
+    color: #4a148c; 
+}
+
+/* Erreur */
+.error {
+    background-color: rgba(255, 100, 100, 0.45) !important;
+    border: 2px solid #e53935 !important;
+    color: #880e4f !important;
+}
+
+/* Boutons de Contrôle */
+.controls {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    max-width: 650px; 
+}
+.controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #ff9800; 
+    color: white;
+    border: none;
+    border-radius: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+}
+
+.controls button:hover {
+    background-color: #fb8c00;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ================================================= */
+/* ============= MODE SOMBRE : CYBER FUTUR (Classe 'dark') ============ */
+/* ================================================= */
+
+body.dark { /* CLASSE 'DARK' RÉTABLIE */
+    background-color: #0a0a0d;
+    color: #00ffff; 
+    font-family: 'Consolas', monospace;
+}
+
+body.dark .grid-container {
+    width: 630px; 
+    height: 630px;
+    border-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), 0 0 5px rgba(0, 255, 255, 0.3);
+    border-radius: 0;
+    margin-bottom: 25px; 
+}
+
+body.dark .cell {
+    width: 70px;
+    height: 70px;
+    font-size: 30px; 
+    background-color: #1a1a2e;
+    border-color: #333366;
+    color: #f0f8ff;
+    border-radius: 0;
+}
+
+body.dark .cell:hover {
+    background-color: #2e1a3e;
+    box-shadow: inset 0 0 5px rgba(100, 100, 255, 0.5);
+}
+
+/* BORDURES 3X3 CORRIGÉES (MODE CYBER) */
+
+/* Bordure droite des colonnes 3 et 6 */
+body.dark .cell:nth-child(3n) {
+    border-right: 3px solid #00ffff !important;
+}
+
+/* Bordure haute des lignes 1, 4 et 7 */
+body.dark .cell:nth-child(n):nth-child(-n + 9), 
+body.dark .cell:nth-child(n + 19):nth-child(-n + 36), 
+body.dark .cell:nth-child(n + 46):nth-child(-n + 63) { 
+    border-top: 3px solid #00ffff !important;
+}
+
+/* Bordure basse des lignes 3 et 6 */
+body.dark .cell:nth-child(27n), body.dark .cell:nth-child(54n) {
+    border-bottom: 3px solid #00ffff !important;
+}
+
+body.dark .fixed {
+    background-color: #0d214f;
+    color: #90ee90;
+}
+
+body.dark .error {
+    background-color: rgba(255, 0, 150, 0.4) !important;
+    border-color: #ff00ff !important;
+    color: #ff66ff !important;
+    box-shadow: 0 0 8px #ff00ff;
+}
+
+body.dark .controls button {
+    background-color: #00ffff;
+    color: #0a0a0d;
+    border: 2px solid #00ffff;
+    border-radius: 0;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+body.dark .controls button:hover {
+    background-color: #00cccc;
+    box-shadow: 0 0 15px #00ffff;
+}
