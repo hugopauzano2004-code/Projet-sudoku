@@ -19,9 +19,8 @@ Git (Télécharger Git (https://git-scm.com/downloads))
 
 ### Télécharger le projet
 ```bash
-git clone https://github.com/hugopauzano2004-code/Projet-sudoku.git
+git clone https://github.com/hugopauzano2004-code/Projet-sudoku
 ```
 ### Lancer le projet
 
 ouvrir le lien sur google
-
