@@ -10,8 +10,9 @@ Ce projet est un jeu de sudoku interactif avec la possiblilité de vérifier sa 
 
 HTML, 
 CSS,
-Javascript et
-Google Gémini pour l'apprentisage
+Javascript,
+Google Gémini pour l'apprentisage et 
+Cursor
 
 ## Installation
 ### Prérequis 
