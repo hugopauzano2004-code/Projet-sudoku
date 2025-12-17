@@ -165,10 +165,103 @@ function resetGrid() {
     document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('error'));
 }
 
+// Fonction pour vérifier si un nombre peut être placé à une position donnée
+function isValid(grid, row, col, num) {
+    // Vérifier la ligne
+    for (let c = 0; c < 9; c++) {
+        if (grid[row][c] === num) return false;
+    }
+    
+    // Vérifier la colonne
+    for (let r = 0; r < 9; r++) {
+        if (grid[r][col] === num) return false;
+    }
+    
+    // Vérifier la région 3x3
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+    for (let r = startRow; r < startRow + 3; r++) {
+        for (let c = startCol; c < startCol + 3; c++) {
+            if (grid[r][c] === num) return false;
+        }
+    }
+    
+    return true;
+}
 
+// Fonction de résolution du Sudoku avec backtracking
+function solveSudoku(grid) {
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            if (grid[row][col] === 0) {
+                for (let num = 1; num <= 9; num++) {
+                    if (isValid(grid, row, col, num)) {
+                        grid[row][col] = num;
+                        
+                        if (solveSudoku(grid)) {
+                            return true;
+                        }
+                        
+                        grid[row][col] = 0; // Backtrack
+                    }
+                }
+                return false; // Aucun nombre valide trouvé
+            }
+        }
+    }
+    return true; // Grille complète
+}
+
+// Fonction pour afficher la solution
+function showSolution() {
+    // Créer une copie de la grille initiale pour résoudre
+    const solutionGrid = JSON.parse(JSON.stringify(initialGrid));
+    
+    if (solveSudoku(solutionGrid)) {
+        // Mettre à jour currentGrid avec la solution
+        currentGrid = solutionGrid;
+        renderGrid(currentGrid);
+        messageElement.textContent = "💡 Voici la solution complète !";
+        messageElement.classList.add('success');
+        document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('error'));
+    } else {
+        messageElement.textContent = "❌ Impossible de résoudre cette grille.";
+        messageElement.classList.remove('success');
+    }
+}
+
+
+
+// Gestion du thème sombre
+function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    
+    // Vérifier si un thème est sauvegardé dans le localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌙';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+        if (body.classList.contains('dark-theme')) {
+            themeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     renderGrid(initialGrid);
     document.getElementById('check-btn').addEventListener('click', checkSolution);
     document.getElementById('reset-btn').addEventListener('click', resetGrid);
+    document.getElementById('solution-btn').addEventListener('click', showSolution);
+    initTheme();
 });
