@@ -24,4 +24,4 @@ git clone https://github.com/hugopauzano2004-code/Projet-sudoku
 ```
 ### Lancer le projet
 
-ouvrir le lien sur google
+ouvrir l'`index.html` sur google
